@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from .models import Topic
-from .froms import TopicForm
+from .forms import TopicForm
 
 
 # Create your views here.
@@ -28,11 +28,12 @@ def new_topic(request):
     """添加主题"""
     if request.method != 'POST':
         # 未提交数据，创建一个新表单
-        from = TopicForm()
+        form = TopicForm()
     else:
         # POST提交的数据， 对数据进行处理
-        if from.is_valid():
-            from.save()
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect(reverse('learning_logs:topics'))
     context = {'form': form}
-    retrun render(request, 'learning_logs/new_topic.html', context)
+    return render(request, 'learning_logs/new_topic.html', context)
