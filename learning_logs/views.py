@@ -30,4 +30,9 @@ def new_topic(request):
         # 未提交数据，创建一个新表单
         from = TopicForm()
     else:
-        pass
+        # POST提交的数据， 对数据进行处理
+        if from.is_valid():
+            from.save()
+            return HttpResponseRedirect(reverse('learning_logs:topics'))
+    context = {'form': form}
+    retrun render(request, 'learning_logs/new_topic.html', context)
