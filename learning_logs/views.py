@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
@@ -11,6 +12,7 @@ def index(request):
     return render(request, 'learning_logs/index.html')
 
 
+@login_required
 def topics(request):
     topics = Topic.objects.order_by('date_added')
     context = {'topics': topics}
@@ -67,6 +69,6 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save
-            return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic_id]))
-    context = {'entry': entry, 'topic': topic}
+            return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
+    context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
