@@ -136,7 +136,7 @@ if os.getcwd() == '/app':
         'default': dj_database_url.config(default='postgres://localhost')
     }
     # 让request.is_secure()承认X-Forwarded-Proto头
-    SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # 支持所有的主机头
     ALLOWED_HOSTS = ['*']
