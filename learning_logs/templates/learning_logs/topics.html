@@ -1,7 +1,10 @@
 {% extends "learning_logs/base.html" %}
 
+{% block header %}
+	<h1>所有主题</h1>
+{% endblock header %}
+
 {% block content %}
-	<p>Topics</p>
 	<ul>
 		{% for topic in topics %}
 			<li>
@@ -11,5 +14,5 @@
 			<li>No topics have bean added yet.</li>
 		{% endfor %}
 	</ul>
-	<a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
+	<a href="{% url 'learning_logs:new_topic' %}">添加一个新的主题</a>
 {% endblock content %}
