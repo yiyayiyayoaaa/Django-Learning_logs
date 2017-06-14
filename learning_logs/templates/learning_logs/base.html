@@ -21,9 +21,11 @@
 					<a class="navbar-brand" href="{% url 'learning_logs:index' %}">学习笔记</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapsed">
+					{% if user.is_authenticated %}
 					<ul class="nav navbar-nav">
 						<li><a href="{% url 'learning_logs:topics' %}">主题列表</a></li>
 					</ul>
+					{% endif %}
 					<ul class="nav navbar-nav navbar-right">
 						{% if user.is_authenticated %}
 							<li><a>Hello, {{ user.username }}</a></li>

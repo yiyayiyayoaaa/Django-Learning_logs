@@ -2,7 +2,8 @@
 
 {% block header %}
 	<div class="jumbotron">
-		<h1>Track your learning.</h1>
+		<h2>{% if user.is_authenticated %}Hello, {{ user.username }}{% endif %}</h2>
+		<h1 style="text-align: center;">Track your learning. </h1>
 	</div>
 {% endblock header %}
 
